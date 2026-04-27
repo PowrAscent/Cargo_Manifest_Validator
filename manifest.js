@@ -48,7 +48,21 @@ const validateManifest = (manifest) => {
 
 }
 
-console.log(validateManifest({ containerId: -2 }));
+const processManifest = (manifest) => {
+  const validate = validateManifest(manifest)
+  
+  if (Object.keys(validate).length === 0) {
+    const normalized = normalizeUnits(manifest)
+    console.log(`Validation success: ${manifest.containerId}`)
+    console.log(`Total weight: ${normalized.weight} kg`)
+  } else if (Object.keys(validate).length > 0) {
+    console.log(`Validation error: ${manifest.containerId}`)
+    console.log(validate)
+  }
+
+}
+
+processManifest({ containerId: 55, destination: "Carmel", weight: 400, unit: "lb", hazmat: false });
 
 /* 
 
